@@ -245,6 +245,7 @@ module LibertyBuildpack::Services
     #------------------------------------------------------------------------------------
     def create_mongo(doc, lib_dir)
       # create the mongo and set the standard set of attributes.
+      puts "        Adding to server.xml: 'mongo' stanza"
       mongo = REXML::Element.new('mongo', doc.root)
       mongo.add_attribute('id', @mongo_id)
       mongo.add_attribute('libraryRef', @lib_id)
@@ -256,6 +257,7 @@ module LibertyBuildpack::Services
       ports = REXML::Element.new('ports', mongo)
       ports.add_text(@ports)
       # create the mongoDB
+      puts "        Adding to server.xml: 'mongoDB' stanza"
       mongodb = REXML::Element.new('mongoDB', doc.root)
       mongodb.add_attribute('id', @mongodb_id)
       mongodb.add_attribute('databaseName', @db_name)

@@ -248,6 +248,7 @@ module LibertyBuildpack::Services
     #------------------------------------------------------------------------------------
     def create_datasource(doc, lib_dir)
       # create the datasource and set the standard set of attributes.
+      puts "        Adding to server.xml: 'dataSource' stanza"
       ds = REXML::Element.new('dataSource', doc.root)
       ds.add_attribute('id', @datasource_id)
       ds.add_attribute('jdbcDriverRef', @jdbc_driver_id)
@@ -288,6 +289,7 @@ module LibertyBuildpack::Services
         # Not found, create it. The JDBC Driver is created as a global element and not nested underneath the datasource.
         # puts "jdbcDriver #{jdbc_driver_id} not found, creating it"
         # create the jdbcDriver
+        puts "        Adding to server.xml: 'jdbcDriver' stanza"
         driver = REXML::Element.new('jdbcDriver', doc.root)
         driver.add_attribute('id', jdbc_driver_id)
         driver.add_attribute('libraryRef', lib_id)

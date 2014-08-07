@@ -78,6 +78,7 @@ module LibertyBuildpack::Services
       raise "create_global_library: fileset with id #{fileset_id} already exists" if filesets.size != 0
       # puts "create_lib with lib id of #{lib_id} and fileset_id of #{fileset_id} and includes of #{@client_jars_string}"
       # create the library and fileset. Library gets created at global scope and fileset is nested within it.
+      puts "        Adding to server.xml: 'library' stanza with ID '#{lib_id}'"
       library = REXML::Element.new('library', doc.root)
       library.add_attribute('id', lib_id)
       library.add_attribute('apiTypeVisibility', api_visibility) if api_visibility.nil? == false
@@ -100,6 +101,7 @@ module LibertyBuildpack::Services
     # @raise [Exception] if a problem is detected.
     #------------------------------------------------------------------------------------
     def self.update_library(doc, name, library, default_id, lib_dir, client_jars_string)
+      puts '        Updating server.xml: Library stanza has been found -- verifying/updating Library contents'
       # check first for the default fileset. This search should succeed if the user has followed our documented conventions.
       default = doc.elements.to_a("//fileset[@id='#{default_id}']")
       unless default.empty?

@@ -124,7 +124,9 @@ module LibertyBuildpack::Container
       driver_dir = '${server.config.dir}/lib'
       @services_full_autoconfig.each do |service|
         begin
+          configured_service = service[INSTANCE].instance_variable_get(:@type)
           if create
+            puts "-----> Processing auto-configuration for '#{configured_service}'" unless configured_service == 'default'
             service[INSTANCE].create(document.root, server_dir, driver_dir, driver_jars)
           else
             service[INSTANCE].update(document.root, server_dir, driver_dir, driver_jars, get_number_instances(service[CONFIG]))

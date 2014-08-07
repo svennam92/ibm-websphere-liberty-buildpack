@@ -512,7 +512,7 @@ module LibertyBuildpack::Container
     def download_and_unpack_archive(uri, root)
       # all file types filtered here should be handled inside block.
       if uri.end_with?('.tgz', '.tar.gz', '.zip', 'jar')
-        print "Downloading from #{uri} ... "
+        print "-----> Downloading from #{uri} ... "
         download_start_time = Time.now
         LibertyBuildpack::Util::ApplicationCache.new.get(uri) do |file|
           print "(#{(Time.now - download_start_time).duration}).\n"
@@ -527,7 +527,7 @@ module LibertyBuildpack::Container
     end
 
     def install_archive(file, uri, root)
-      print 'Installing archive ... '
+      print '        Installing archive ... '
       install_start_time = Time.now
       if uri.end_with?('.zip', 'jar')
         ContainerUtils.unzip(file.path, root)
@@ -545,7 +545,7 @@ module LibertyBuildpack::Container
         # each esa is an array of two entries, uri and options string
         uri = esa[0]
         options = esa[1]
-        print "Downloading from #{uri} ... "
+        print "-----> Downloading from #{uri} ... "
         download_start_time = Time.now
         # for each downloaded file, there is a corresponding cached, etag, last_modified, and lock extension
         LibertyBuildpack::Util::ApplicationCache.new.get(uri) do |file|
@@ -556,7 +556,7 @@ module LibertyBuildpack::Container
     end
 
     def install_esa(file, options, root)
-      print 'Installing feature ... '
+      print '        Installing feature ... '
       install_start_time = Time.now
       # setup the command and options
       cmd = File.join(root, 'wlp', 'bin', 'featureManager')

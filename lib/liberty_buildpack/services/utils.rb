@@ -95,6 +95,7 @@ module LibertyBuildpack::Services
           end  # element
         end # managers
         if found == false
+          puts "        Adding to server.xml: '#{feature}' feature to featureManager"
           log_feature = REXML::Element.new('feature', managers[0])
           log_feature.add_text(feature)
         end
@@ -233,6 +234,7 @@ module LibertyBuildpack::Services
       classloaders = apps[0].get_elements('classloader')
       # At present, Liberty only allows a single classloader element per application However, assume this may change in the future, handle partitioned classloader.
       if classloaders.empty?
+        puts "        Adding to server.xml: 'classloader' entry for your application with the library ID '#{lib_id}'"
         classloader_element = REXML::Element.new('classloader', apps[0])
         classloader_element.add_attribute('commonLibraryRef', lib_id)
         return

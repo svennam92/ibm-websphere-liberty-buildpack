@@ -59,6 +59,7 @@ module LibertyBuildpack::Services
         # Not found, create it. The JDBC Driver is created as a global element and not nested underneath the datasource.
         # puts "jdbcDriver #{jdbc_driver_id} not found, creating it"
         # create the jdbcDriver
+        puts "        Adding to server.xml: 'jdbcDriver' stanza"
         driver = REXML::Element.new('jdbcDriver', doc.root)
         driver.add_attribute('id', jdbc_driver_id)
         driver.add_attribute('javax.sql.XADataSource', 'org.postgresql.xa.PGXADataSource')

@@ -60,6 +60,7 @@ module LibertyBuildpack::Services
         # puts "jdbcDriver #{jdbc_driver_id} not found, creating it"
         # create the jdbcDriver
         driver = REXML::Element.new('jdbcDriver', doc.root)
+        puts "        Adding to server.xml: 'jdbcDriver' stanza"
         driver.add_attribute('id', jdbc_driver_id)
         driver.add_attribute('javax.sql.XADataSource', 'org.mariadb.jdbc.MySQLDataSource')
         driver.add_attribute('javax.sql.ConnectionPoolDataSource', 'org.mariadb.jdbc.MySQLDataSource')
